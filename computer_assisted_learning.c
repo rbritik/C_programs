@@ -1,1 +1,0 @@
-// Program to test knowledge of basic artihmetic of children
