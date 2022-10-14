@@ -1,5 +1,5 @@
 // Computer Assisted Learning 
-/* Program to check knowledge of user on single or double digit multiplication */
+/* Program to check knowledge of user of arithmetic of single and double digits */
 
 
 #include <stdio.h>
@@ -13,8 +13,14 @@ int rand_one(void);
 // Generates a double digit random number
 int rand_two(void);
 
-// Function for taking user input and comparing it with correct answer
-int product(int x, int y);
+// Function for sum
+int addition(int x, int y);
+
+// Function for subtraction
+int subtraction(int x, int y);
+
+// Function for product
+int multiplication(int x, int y);
 
 // Function for calculating what percentage of answers are correct
 void percentage(int right, int wrong);
@@ -31,15 +37,28 @@ int main()
 	// get two random one digit numbers
 	while (true) 
 	{
+		int problem_type;
 		int difficulty; // difficulty level to be entered by the user
 		int correct_count = 0;  // Counting how many answers of user are correct
 		int wrong_count = 0;  // Counting how many answers of user are incorrect
 
-		do{
+		// If problem type is not between 1 and 4 then keep asking for problem type
+		do
+		{
+			printf("Enter 1 to check your understanding of addition, "
+				   "2 for subtraction, 3 for multiplication, 4 for random problems: ");
+			scanf("%d", &problem_type);
+		} 
+		while ((problem_type <= 1) && (problem_type >= 4));  
+		                                                  
+		// If difficulty is neither 1 nor zero then keep asking for difficulty
+		do
+		{
 			printf("Enter difficulty level (1 for easy, 2 for hard): ");
 			scanf("%d", &difficulty);
-		} while ((difficulty != 1) && (difficulty != 2));  // If difficulty is neither 1 nor zero then keep asking for 
-		                                                   // difficulty
+		}
+		while ((difficulty != 1) && (difficulty != 2));  
+
 		
 		for(int q_no = 1; q_no <= 10; q_no++)   // Ask 10 questions
 		{
@@ -53,7 +72,37 @@ int main()
 				num1 = rand_two();
 				num2 = rand_two();
 			}
-			play = product(num1, num2);
+
+			// Calling functions on basis of problem type entered by the user
+			switch(problem_type)
+			{
+				case 1: 
+					play = addition(num1, num2);
+					break;
+
+				case 2:
+					play = subtraction(num1, num2);
+					break;
+
+				case 3:
+					play = multiplication(num1, num2);
+					break;
+
+				case 4:  // Random problems
+					int n = rand() % 3;
+					if (n == 0)
+					{
+						play = addition(num1, num2);
+					}
+					else if (n == 1)
+					{
+						play = subtraction(num1, num2);
+					}
+					else
+					{
+						play = multiplication(num1, num2);
+					}
+			}
 
 			if (play == -1) // Ask whether the user want to discontinue
 			{
@@ -78,7 +127,7 @@ int main()
 
 		percentage(correct_count, wrong_count);
 		puts("");
-		puts("For new user");
+		puts("------- Reset ------");
 	}
 	return 0;
 }  // Ending of main function
@@ -102,8 +151,55 @@ int rand_two(void)
 }  // Function ends
 
 
-// Function for asking user for answer 
-int product(int num1, int num2)
+// Function for sum
+int addition(int num1, int num2)
+{
+	int ans;  // Answer to be entered by the user
+	int sum = num1 + num2;
+
+	printf("How much is %d + %d: ", num1, num2);
+	scanf("%d", &ans);
+
+	if (ans == -1)
+	{
+		return -1;  // If user doesn't want to continue then return -1
+	}
+
+	if (ans == sum)
+	{
+		return 1;
+	}
+
+	return 0;
+}
+
+
+// Function for subtraction
+int subtraction(int num1, int num2)
+{
+	int ans;  // Answer to be entered by the user
+	int subtract = num1 - num2;
+
+	printf("How much is %d - %d (1000 to discontinue): ", num1, num2);
+	scanf("%d", &ans);
+
+	// Because subtraction of 2 one or two digit number will be less than 1000, so coming out of function
+	if (ans == 1000) 
+	{
+		return -1;  // If user doesn't want to continue then return -1
+	}
+
+	if (ans == subtract)
+	{
+		return 1;
+	}
+
+	return 0;
+}
+
+
+// Function for multiplication
+int multiplication(int num1, int num2)
 {
 	int ans;  // Answer entered by the user
 	int product = num1 * num2;
