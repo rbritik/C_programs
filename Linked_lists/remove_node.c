@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+// Structure containing a node number and containing address of next node
 struct node {
     int em_no;
     struct node *next;
@@ -10,9 +11,10 @@ struct node {
 
 typedef struct node Node;
 
-
+// Function prototype
 int remove_node(Node *str, int n);
 void print_list(Node *listp);
+void freeList(Node *head);
 
 // Main Function
 int main(void)
@@ -65,6 +67,9 @@ int main(void)
     
     // Printing list after removing nth node
     print_list(head);
+
+    // Function to free the list
+    freeList(head);
     return 0;
 }
 
@@ -114,4 +119,18 @@ void print_list(Node *list)
         printf("%d ", listptr->em_no);
         listptr = listptr->next;
     }
+}
+
+// Function for freeing the list
+void freeList(Node *head)
+{
+    Node *tmp;
+
+    while (head != NULL)
+    {
+       tmp = head;
+       head = head->next;
+       free(tmp);
+    }
+
 }
