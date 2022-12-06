@@ -126,7 +126,7 @@ int main(void)
     }
     
 
-    display_list(head);  // display list after removing node
+    display_list(head);  // display list after swaping node
     free_list(head);  // Freeing memory
     return 0;
 }
