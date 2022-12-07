@@ -1,4 +1,4 @@
-// Remove nth element from end in a linked list
+// Program to swap two nodes of a linked list
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>

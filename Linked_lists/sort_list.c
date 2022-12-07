@@ -1,4 +1,4 @@
-// Program to reverse the linked list
+// Sorting a linked list using bubble sort
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -15,7 +15,7 @@ typedef struct node Node;
 // Function Prototypes
 void create_list(int n);
 void display_list(Node *ptr);
-int reverse_list(void);
+int sort_list(int n);
 void free_list(Node *ptr1);
 
 // Main Function
@@ -39,19 +39,19 @@ int main(void)
 
     if (length == 1)  // If length of linked list is 1
     {
-        puts("Reversed list is same as initial list");
+        puts("List is already sorted");
     }    
     else
     {
-        // Calling function to reverse the list
-        reverse_list();
+        // Calling function to sort the list
+        sort_list(length);
     }
 
-    // Display the reversed list
+    // Display the sorted list
     puts("");
-    printf("Reversed list: ");
+    printf("Sorted list: ");
 
-    display_list(head);  // display list after reversing
+    display_list(head);  
 
     // Freeing memory
     free_list(head); 
@@ -89,31 +89,76 @@ void create_list(int len)
     }
 }
 
-// Function to reverse the list
-int reverse_list(void)
+
+// Function to sort the list
+int sort_list(int len)
 {
     // Pointers to update the lists
-    Node *temp = head->next; 
-    Node *pptr = temp->next;  
-    Node *ptr = head;
+    Node *temp = NULL; 
+    Node *pptr = NULL;  
+    Node *ptr = NULL;
     
-    while (temp != NULL)
-    {
-        temp->next = pptr;
-        pptr = temp;
-        temp = ptr;
+    int a = 0;  // For counting number of times loops run
 
-        if (ptr != NULL)
+    // Outer loop to run for elements other than head
+    for (int count = 2; count < len; count++)
+    {
+        temp = head->next; // Central pointer
+        pptr = head;  // previous pointer
+        ptr = temp->next;  // With which we have to compare
+
+        // Inner loop to run for right position of temp variable
+        while ((ptr != NULL))
         {
-            ptr = ptr->next;
+            if ((temp->em_no > ptr->em_no))
+            {
+                pptr->next = ptr;
+                temp->next = ptr->next;
+                ptr->next = temp;
+
+                pptr = pptr->next;
+                ptr = temp->next; 
+            }
+
+            else
+            {
+                temp = temp->next;
+                pptr = pptr->next;
+                ptr = ptr->next;
+            }
+            a++;
         }
     }
 
-    head->next = NULL;
-    head = pptr;  // Changing head to last element
-    return 0;
-    
-}
+    temp = head->next;
+
+    // For taking element at head at its correct position
+    if (head->em_no > temp->em_no)
+    {
+        head->next = temp->next;  
+        temp->next = head;
+        head = temp;
+
+        temp = head->next;
+        pptr = head;
+        ptr = temp->next; 
+
+        while (ptr != NULL && (temp -> em_no > ptr->em_no))
+        {
+            pptr->next = ptr;
+            temp->next = ptr->next;
+            ptr->next = temp;
+
+            pptr = pptr->next;
+            ptr = temp->next;
+            a++;
+        }
+    }
+
+    //printf("\nNumber of times loops run: %d", a);
+
+    return 0;   
+}  // End of sorting function
 
 
 // Function to display list
