@@ -1,3 +1,5 @@
-# C_projects
+# C problems for Arrays, Functions, Linked Lists, Algorithms
 
-Some programs related to specific topic
+## ^_^
+
+
