@@ -1,4 +1,4 @@
-# C problems for Arrays, Functions, Linked Lists, Algorithms
+# Arrays, Functions, Linked Lists, Algorithms
 
 ## ^_^
 
