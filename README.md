@@ -1,4 +1,4 @@
-# Arrays, Functions, Linked Lists, Algorithms
+# Programs on Data Structure and basic Algorithms
 
 ## ^_^
 
