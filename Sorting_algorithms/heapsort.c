@@ -28,7 +28,10 @@ int main(void)
 	}
 	puts("\n");
 	
-	int size2 = SIZE;  // For nodes except leaf nodes
+	// As in a heap root node is maximum, so replace that with last element of 
+	// heap, then decrease size of heap(as last element will be maximum now)
+	// ,then fixing the max heap property of heap
+	int size2 = SIZE; 
 	for (int i = size2 - 1; i >= 1; i--)
 	{
 		int temp = arr[0];
