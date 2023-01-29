@@ -1,4 +1,4 @@
-# Programs on Data Structure and basic Algorithms
+# Programs on Data Structures and basic Algorithms
 
 ## ^_^
 
