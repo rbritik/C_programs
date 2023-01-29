@@ -54,9 +54,6 @@ void max_heapify(int *heap, int i)
 		largest = r;
 	}
 
-	
-	printf("i: %d l:%d r:%d  largest:%d\n", i, l, r, largest);
-
 	// recurisve step unless parent is bigger than its both child
 	if (largest != i)
 	{
